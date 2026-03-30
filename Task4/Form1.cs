@@ -1,4 +1,4 @@
-namespace lab1
+namespace Task4
 {
     public partial class Form1 : Form
     {
@@ -16,7 +16,7 @@ namespace lab1
         {
             int[] numbers = { 3, 1, 5, 2, 4 };
             int[] numbersSorted = ProceduralSort(numbers);
-            listBoxResults.DataSource = numbersSorted;
+            listBoxResultss.DataSource = numbersSorted;
 
         }
 
@@ -29,6 +29,5 @@ namespace lab1
         {
 
         }
-
     }
 }

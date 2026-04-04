@@ -22,8 +22,8 @@ namespace Task5Part2Final
 
         private void button2Generate_Click(object sender, EventArgs e)
         {
-            numbers = new int[] { 64, 34, 25, 12, 22, 11, 90 };
-            textBox1Output.Text = "🔄 UNSORTED:\n" + string.Join(", ", numbers);
+            numbers = new int[] { 64, 34, 25, 12, 22, 11, 90 }; //sample nuimbers pwede ichange on user input
+            textBox1Output.Text = " UNSORTED:\n" + string.Join(", ", numbers);
             label1Status.Text = "Ready to Sort DESC ";
             label1Status.ForeColor = System.Drawing.Color.Blue;
         }
@@ -32,7 +32,7 @@ namespace Task5Part2Final
         {
             if (numbers.Length == 0)
             {
-                MessageBox.Show("Generate first!");
+                MessageBox.Show("Generate first! ayaya....");
                 return;
             }
 
@@ -40,7 +40,7 @@ namespace Task5Part2Final
             QuickSort(numbers, 0, numbers.Length - 1);
 
             textBox1Output.Text = " BEFORE: \n" + string.Join(", ", new int[] { 64, 34, 25, 12, 22, 11, 90 }) +
-                                 "\n\n  AFTER DESC SORT: \n" + string.Join(", ", numbers);
+                                 "\n\n              AFTER SORTING: \n" + string.Join(", ", numbers);
 
             label1Status.Text = "Sorted Descending!";
             label1Status.ForeColor = System.Drawing.Color.Green;

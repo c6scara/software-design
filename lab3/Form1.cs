@@ -18,6 +18,15 @@ namespace lab3
 
         }
 
+        public class Ebook : Book
+        {
+            public string Format { get; set; }
+            public double FileSize { get; set; }
+            public override string GetInfo()
+            {
+                return $"Title: {Title}, Author: {Author}, Format: {Format}, File Size: {FileSize} MB";
+            }
+        }
         public class Magazine : Book
         {
             public int IssueNumber { get; set; }
@@ -27,16 +36,59 @@ namespace lab3
                 return $"Title: {Title} -  Issue Number: {IssueNumber}";
             }
         }
-
-        private void btnShowInfo_Click(object sender, EventArgs e)
+        private void ProcessBooksPoly(Book[] books, ListBox listBox)
         {
-            Book myBook = new Magazine
+            listBox.Items.Clear();
+            foreach (Book book in books)
             {
-                Title = "Tech Monthly",
-                Author = "John Doe",
-                IssueNumber = 45
+                string info = book.GetInfo();
+                listBox.Items.Add(info);
+            }
+        }
+        private void btnShowInfo_Click(object sender, EventArgs e) //task 2 number 2 diria
+        {
+            Book[] books = new Book[]
+            {
+               new Book
+               {
+                   Title = "The Great Gatsby",
+                     Author = "F. Scott Fitzgerald"
+               },
+                new Ebook
+                {
+                     Title = "The Great Gatsby",
+                        Author = "F. Scott Fitzgerald",
+                        Format = "PDF",
+                        FileSize = 2.5
+                },
+                    new Magazine
+                    {
+                        Title = "The Great Gatsby",
+                        IssueNumber = 5
+                    }
+                   
             };
-            MessageBox.Show(myBook.GetInfo());
+            //display polymorphic method call here
+            ProcessBooksPoly(books, listBoxInfo);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void PolymorphicMethod(Book[] books, ListBox listBox)
+        {
+            listBox.Items.Clear(); 
+            foreach (Book book in books)
+            {
+                string info = book.GetInfo();
+                listBox.Items.Add(info);
+            }
+        }
+
+        private void listBoxInfo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

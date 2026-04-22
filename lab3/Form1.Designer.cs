@@ -48,7 +48,7 @@
             listBoxInfo.ItemHeight = 15;
             listBoxInfo.Location = new Point(301, 95);
             listBoxInfo.Name = "listBoxInfo";
-            listBoxInfo.Size = new Size(467, 289);
+            listBoxInfo.Size = new Size(600, 319);
             listBoxInfo.TabIndex = 1;
             listBoxInfo.SelectedIndexChanged += listBoxInfo_SelectedIndexChanged;
             // 
@@ -61,7 +61,7 @@
             Controls.Add(listBoxInfo);
             Controls.Add(btnShowInfo);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Library - Lab 3 By: Maniego";
             Load += Form1_Load;
             ResumeLayout(false);
         }

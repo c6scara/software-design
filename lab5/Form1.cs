@@ -75,5 +75,94 @@ namespace lab5
             UpdateBookAndAuthor(bookId, txtBookTitle.Text, txtAuthorName.Text);
             MessageBox.Show("Book and Author updated successfully!");
         }
+        public void DeleteBook(int bookId)
+        {
+            using (var context = new BookstoreContext())
+            {
+                var bookToDelete = context.Books.FirstOrDefault(b => b.BookID == bookId);
+
+                if (bookToDelete != null)
+                {
+                    context.Books.Remove(bookToDelete);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        private void btnDeleteBook_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(txtBookID.Text, out int bookId))
+            {
+                DeleteBook(bookId);
+                MessageBox.Show("Book deleted successfully!");
+
+                btnShowBooks_Click(sender, e);
+
+                txtBookID.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid numeric Book ID to delete.");
+            }
+        }
+
+        private void btnSearchBooks_Click(object sender, EventArgs e)
+        {
+            string searchName = txtSearchAuthor.Text;
+
+            if (!string.IsNullOrWhiteSpace(searchName))
+            {
+                var filteredBooks = SearchBooksByAuthor(searchName);
+
+                listBoxBooks.DataSource = filteredBooks;
+
+                if (filteredBooks.Count == 0)
+                {
+                    MessageBox.Show("No books found for that author.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter an author name to search.");
+            }
+        }
+        public List<string> SearchBooksByAuthor(string authorName)
+        {
+            using (var context = new BookstoreContext())
+            {
+                var searchResults = context.Books
+                    .Include(b => b.Author)
+                    .Where(b => b.Author.Name.Contains(authorName))
+                    .Select(b => $"{b.Title} by {b.Author.Name} (ID: {b.BookID})")
+                    .ToList();
+
+                return searchResults;
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddBook_Click(object sender, EventArgs e)
+        {
+            string authorName = txtAuthorName.Text;
+            string bookTitle = txtBookTitle.Text;
+
+            if (!string.IsNullOrWhiteSpace(authorName) && !string.IsNullOrWhiteSpace(bookTitle))
+            {
+                AddAuthorWithBook(authorName, bookTitle);
+
+                MessageBox.Show("Book and Author saved to database!");
+
+                txtAuthorName.Clear();
+                txtBookTitle.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please enter both an author name and a book title.");
+            }
+        }
     }
 }

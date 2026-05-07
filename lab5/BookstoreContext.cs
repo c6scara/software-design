@@ -10,6 +10,10 @@ namespace lab5
 {
     public class BookstoreContext : DbContext
     {
+        public BookstoreContext() 
+        {
+            Database.EnsureCreated();
+        }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

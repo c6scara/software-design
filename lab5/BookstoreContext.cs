@@ -18,7 +18,7 @@ namespace lab5
         public DbSet<Book> Books { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("@Server=(localdb)\\MSSQLLocalDB;Database=BookstoreDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=BookstoreDB;Trusted_Connection=True;");
         }
     }
 }
